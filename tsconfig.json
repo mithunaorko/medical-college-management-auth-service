@@ -1,4 +1,7 @@
 {
+  // sourcing from https://blog.logrocket.com/linting-typescript-eslint-prettier/
+  "include": ["src"], // which files to compile
+  "exclude": ["node_modules"], // which files to skip
   "compilerOptions": {
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
