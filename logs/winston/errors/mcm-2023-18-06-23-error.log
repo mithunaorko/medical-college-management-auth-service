@@ -1,0 +1,12 @@
+Sun Jun 18 2023 23:24:50 } [MCM] error: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "body",
+      "role"
+    ],
+    "message": "role is required"
+  }
+]

@@ -15,7 +15,7 @@ const handleValidationError = (error: mongoose.Error.ValidationError): IGenericE
   return{
     statusCode,
     message: 'Validation Error',
-    errorMessage: errors,
+    errorMessages: errors,
   }
 };
 
