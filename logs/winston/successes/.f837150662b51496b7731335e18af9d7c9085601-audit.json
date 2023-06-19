@@ -139,6 +139,16 @@
             "date": 1687115598237,
             "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-19-06-01-success.log",
             "hash": "e04327ac499e9023ba667e76c6b7f5ef35efadd9a1f20cc1b1286de484af5904"
+        },
+        {
+            "date": 1687145322871,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-19-06-09-success.log",
+            "hash": "48bf17168a38b7ab9565a77943e1693679ead755b440888ef9f4d5de5c578321"
+        },
+        {
+            "date": 1687193865753,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-19-06-22-success.log",
+            "hash": "f434669b40f6255f1bbc2d4b87b65d183de5922a39317a4e1e762fd8eebc546b"
         }
     ],
     "hashType": "sha256"
