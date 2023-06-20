@@ -66,4 +66,3 @@ export const AcademicSemester = model<IAcademicSemester, AcademicSemesterModel>(
   academicSemesterSchema
 );
 
-
