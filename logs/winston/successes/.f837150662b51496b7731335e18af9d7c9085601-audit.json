@@ -179,6 +179,31 @@
             "date": 1687292535056,
             "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-21-06-02-success.log",
             "hash": "dd75d5cca0814afa3ff0f2d082ee387407d7f11f139c42141b4fb83dbb4554db"
+        },
+        {
+            "date": 1687321371565,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-21-06-10-success.log",
+            "hash": "d397845ca79e70490e2b3bfc10a365156d6601745af240ad1e3452caa8bd9100"
+        },
+        {
+            "date": 1687328494659,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-21-06-12-success.log",
+            "hash": "76beca82436b8fea6ec915e3c2a69a947e67cd71471d53695aa5e5021e2f9dd8"
+        },
+        {
+            "date": 1687331625105,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-21-06-13-success.log",
+            "hash": "a73c13ef8c4245800cd73bb75609a7a3722c6371d5bf1fe13b06b25c35f57839"
+        },
+        {
+            "date": 1687334408766,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-21-06-14-success.log",
+            "hash": "53f094f2af017a1f6387f1a7c2bc81c4bf19d2e70bb12067553c751b3163fead"
+        },
+        {
+            "date": 1687371224309,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-22-06-00-success.log",
+            "hash": "f3615c35a3d1ec566fb6c66d524868360588097660ce4e96ea0618e70728aed0"
         }
     ],
     "hashType": "sha256"
