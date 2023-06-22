@@ -214,6 +214,11 @@
             "date": 1687428302235,
             "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-22-06-16-success.log",
             "hash": "b9fe9b0330aa2b55591f4ff09c1cbf1684152d6b025a533b6f9203d6b4bbcd36"
+        },
+        {
+            "date": 1687433211840,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\successes\\mcm-2023-22-06-17-success.log",
+            "hash": "7baab55ffa5d0eda9f5599687954153c86587503d0999aebfa7fc43f7e4ab5b0"
         }
     ],
     "hashType": "sha256"
