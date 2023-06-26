@@ -9,6 +9,7 @@ import handleValidationError from '../../errors/handleValidationError';
 import { IGenericErrorMessage } from '../../interfaces/error';
 import { errorLogger } from '../../shared/logger';
 import handleZodError from '../../errors/handleZodError';
+import handleCastError from '../../errors/handleCastError';
 
 const globalErrorHandler: ErrorRequestHandler = (
   error,
@@ -36,7 +37,15 @@ const globalErrorHandler: ErrorRequestHandler = (
     statusCode = simplifiedError.statusCode;
     message = simplifiedError.message;
     errorMessages = simplifiedError.errorMessages;
-  } else if (error instanceof ApiError) {
+  } else if(error?.name === 'CastError') {
+    // res.status(200).json({error});
+    const simplifiedError = handleCastError(error);
+    statusCode = simplifiedError.statusCode;
+    message = simplifiedError.message;
+    errorMessages = simplifiedError.errorMessage;
+  }
+  
+  else if (error instanceof ApiError) {
     statusCode = error?.statusCode;
     message = error.message;
     errorMessages = error?.message
