@@ -4,7 +4,10 @@ import ApiError from '../../../errors/ApiError';
 import { paginationHelpers } from '../../../helpers/paginationHelper';
 import { IGenericResponse } from '../../../interfaces/common';
 import { IPaginationOptions } from '../../../interfaces/pagination';
-import { academicSemesterSearchableFields, academicSemesterTitleCodeMapper } from './academicSemester.constant';
+import {
+  academicSemesterSearchableFields,
+  academicSemesterTitleCodeMapper,
+} from './academicSemester.constant';
 import {
   IAcademicSemester,
   IAcademicSemesterFilters,
@@ -45,12 +48,12 @@ const getAllSemesters = async (
   }
 
   // using dynamic filter
-  if(Object.keys(filtersData).length){
+  if (Object.keys(filtersData).length) {
     andConditions.push({
       $and: Object.entries(filtersData).map(([field, value]) => ({
-        [field]: value
-      }))
-    })
+        [field]: value,
+      })),
+    });
   }
   // const andConditions = [
   //   {
@@ -86,7 +89,8 @@ const getAllSemesters = async (
     sortCondition[sortBy] = sortOrder;
   }
 
-  const whereConditions = andConditions.length > 0 ? {$and: andConditions} : {}
+  const whereConditions =
+    andConditions.length > 0 ? { $and: andConditions } : {};
   const result = await AcademicSemester.find(whereConditions)
     .sort(sortCondition)
     .skip(skip)
@@ -103,14 +107,35 @@ const getAllSemesters = async (
   };
 };
 
-// get a single semester 
-const getSingleSemester = async(id: string): Promise<IAcademicSemester | null> => {
-  const result = await AcademicSemester.findById(id)
+// get a single semester
+const getSingleSemester = async (
+  id: string
+): Promise<IAcademicSemester | null> => {
+  const result = await AcademicSemester.findById(id);
   return result;
-}
+};
+
+// update semester
+const updateSemester = async (
+  id: string,
+  payload: Partial<IAcademicSemester>
+): Promise<IAcademicSemester | null> => {
+  if (
+    payload.title &&
+    payload.code &&
+    academicSemesterTitleCodeMapper[payload.title] !== payload.code
+  ) {
+    throw new ApiError(httpStatus.BAD_REQUEST, 'Invalid semester code');
+  }
+  const result = await AcademicSemester.findOneAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
+  return result;
+};
 
 export const AcademicSemesterService = {
   createSemester,
   getAllSemesters,
   getSingleSemester,
+  updateSemester,
 };
