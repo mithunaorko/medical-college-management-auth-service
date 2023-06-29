@@ -15,6 +15,7 @@ const globalErrorHandler: ErrorRequestHandler = (
   error,
   req: Request,
   res: Response,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   next: NextFunction
 ) => {
   // when our application on development mood show error using console.log(error) and when app is running on production mood that case error store inside error log file
