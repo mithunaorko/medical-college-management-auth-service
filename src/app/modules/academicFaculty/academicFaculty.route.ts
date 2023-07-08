@@ -13,9 +13,19 @@ router.post(
 );
 
 // get single semester
-router.get('/:id', AcademicFacultyController.getSingleFaculty)
+router.get('/:id', AcademicFacultyController.getSingleFaculty);
 
 // update faculty
-router.patch('/:id', AcademicFacultyController.updateFaculty)
+router.patch(
+  '/:id',
+  validateRequest(AcademicFacultyValidation.updateFacultyZodSchema),
+  AcademicFacultyController.updateFaculty
+);
+
+// delete faculty
+router.delete('/:id', AcademicFacultyController.deleteFaculty);
+
+// get all faculty
+router.get('/', AcademicFacultyController.getAllFaculties);
 
 export const AcademicFacultyRoutes = router;
