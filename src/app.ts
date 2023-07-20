@@ -2,7 +2,7 @@ import cors from 'cors';
 import express, { Application, NextFunction, Request, Response } from 'express';
 import httpStatus from 'http-status';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
-import { generateFacultyId } from './app/modules/user/user.utils';
+// import { generateFacultyId } from './app/modules/user/user.utils';
 import routes from './app/routes';
 const app: Application = express();
 
@@ -40,11 +40,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 //   code: '03',
 // };
 
-const testSId = async () => {
-  const tId = await generateFacultyId();
-  console.log(tId);
-};
+// const testSId = async () => {
+//   const tId = await generateFacultyId();
+//   console.log(tId);
+// };
 
-testSId();
+// testSId();
 
 export default app;
