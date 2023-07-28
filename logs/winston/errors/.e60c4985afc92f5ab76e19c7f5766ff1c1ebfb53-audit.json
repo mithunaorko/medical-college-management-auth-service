@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\errors\\.e60c4985afc92f5ab76e19c7f5766ff1c1ebfb53-audit.json",
+    "files": [
+        {
+            "date": 1686579245582,
+            "name": "H:\\Apollo-level-2\\project\\medical-college-management-auth-service\\logs\\winston\\errors\\mcm-2023-12-06- 20-error.log",
+            "hash": "5cc92f28fc4e2731c557bc6e62719204f2d7081450430c8b2327bf5c7c6be496"
+        }
+    ],
+    "hashType": "sha256"
+}
