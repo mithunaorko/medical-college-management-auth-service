@@ -18,7 +18,7 @@ import { generateStudentId } from './user.utils';
 const createStudent = async (
   student: IStudent,
   user: IUser
-): Promise<IUser | null> => {
+): Promise<IUser | null > => {
   // default password
   if (!user.password) {
     user.password = config.default_student_pass as string;
