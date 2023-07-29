@@ -2,7 +2,7 @@
   "name": "y",
   "version": "1.0.0",
   "description": "",
-  "engines":">=16",
+  "engines":">=14",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
     "start": "node dist/server.js",
