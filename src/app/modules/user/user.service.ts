@@ -12,6 +12,7 @@ import { Student } from '../student/student.model';
 import { IUser } from './user.interface';
 import { User } from './user.model';
 import { generateStudentId } from './user.utils';
+import { IAcademicSemester } from '../academicSemester/academicSemester.interface';
 // import { generateFacultyId } from './user.utils'
 
 // create user
@@ -38,7 +39,7 @@ const createStudent = async (
   try {
     // first start the session transaction
     session.startTransaction();
-    const id = await generateStudentId(academicsemester);
+    const id = await generateStudentId(academicsemester as IAcademicSemester);
     // custom id same as user id and same as student id
     user.id = id;
     student.id = id;
@@ -90,8 +91,8 @@ const createStudent = async (
         
       ]
     })
-    return newUserAllData
   }
+  return newUserAllData
 };
 
 export const userService = {

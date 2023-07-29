@@ -85,8 +85,8 @@ const createStudent = (student, user) => __awaiter(void 0, void 0, void 0, funct
                 },
             ]
         });
-        return newUserAllData;
     }
+    return newUserAllData;
 });
 exports.userService = {
     createStudent,
