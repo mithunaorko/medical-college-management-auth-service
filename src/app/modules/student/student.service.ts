@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
 import { SortOrder } from 'mongoose';
 import ApiError from '../../../errors/ApiError';
@@ -11,7 +12,7 @@ import { Student } from './student.model';
 // get student
 const getSingleStudent = async (id: string): Promise<IStudent | null> => {
   const result = await Student.findById(id)
-    .populate('academicSemester')
+    .polygon('academicSemester')
     .populate('academicDepartment')
     .populate('academicFaculty');
   return result;
@@ -58,7 +59,7 @@ const getAllStudents = async (
   const whereConditions =
     andConditions.length > 0 ? { $and: andConditions } : {};
   const result = await Student.find(whereConditions)
-    .populate('academicSemester')
+    .polygon('academicSemester')
     .populate('academicDepartment')
     .populate('academicFaculty')
     .sort(sortConditions)
@@ -77,7 +78,6 @@ const getAllStudents = async (
   };
 };
 
-// update student
 const updateStudent = async (
   id: string,
   payload: Partial<IStudent>
@@ -91,19 +91,19 @@ const updateStudent = async (
   const { name, guardian, localGuardian, ...studentData } = payload;
   const updateStudentData: Partial<IStudent> = { ...studentData };
 
+  // dynamic handling
   if (name && Object.keys(name).length > 0) {
     Object.keys(name).forEach(key => {
-      const nameKey = `name.${key}` as keyof Partial<IStudent>; // `name.firstName`
-      (updateStudentData as any)[nameKey] = name[key as keyof typeof name]; //  updateStudentData['name.firstName'] = name[firstName]
+      const nameKey = `name.${key}` as keyof Partial<IStudent>;  // `name.firstName`
+      (updateStudentData as any)[nameKey] = name[key as keyof typeof name];
     });
-  }
+  };
 
-  if (guardian && Object.keys(guardian).length > 0) {
+  if(guardian && Object.keys(guardian).length > 0){
     Object.keys(guardian).forEach(key => {
       const guardianKey = `guardian.${key}` as keyof Partial<IStudent>; // `guardian.motherName`
-      (updateStudentData as any)[guardianKey] =
-        guardian[key as keyof typeof guardian]; //  updateStudentData['guardian.motherName'] = guardian[motherName]
-    });
+      (updateStudentData as any)[guardianKey] = guardian[key as keyof typeof guardian] //  updateStudentData['guardian.motherName'] = guardian[motherName]
+    })
   }
 
   if(localGuardian && Object.keys(localGuardian).length > 0){
@@ -113,6 +113,7 @@ const updateStudent = async (
     })
 
   }
+
   const result = await Student.findOneAndUpdate({ id }, updateStudentData, {
     new: true,
   });

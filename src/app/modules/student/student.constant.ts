@@ -10,11 +10,4 @@ export const studentSearchableFields = [
   'name.lastName',
 ];
 
-export const studentFilterableFields = [
-  'searchTerm',
-  'id',
-  'bloodGroup',
-  'email',
-  'contactNo',
-  'emergencyContactNo',
-];
+export const studentFilterableFields = ['searchTerm', 'id', 'bloodGroup', 'email', 'contactNo', 'emergencyContactNo']
