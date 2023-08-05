@@ -1,7 +1,6 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
-    "source.organizeImports": true,
-    "json.schemaDownload.enable": true
+    "source.organizeImports": true
   }
 }
