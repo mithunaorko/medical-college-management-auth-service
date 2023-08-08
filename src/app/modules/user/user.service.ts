@@ -2,14 +2,15 @@
   -> Database logic here only / business logic
 */
 
+// import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
 import mongoose from 'mongoose';
 import config from '../../../config/index';
 import ApiError from '../../../errors/ApiError';
 import { IAcademicSemester } from '../academicSemester/academicSemester.interface';
 import { AcademicSemester } from '../academicSemester/academicSemester.model';
-import { Admin } from '../admin/admin.model';
 import { IAdmin } from '../admin/admin.interface';
+import { Admin } from '../admin/admin.model';
 import { IFaculty } from '../faculty/faculty.interface';
 import { Faculty } from '../faculty/faculty.model';
 import { IStudent } from '../student/student.interface';
@@ -31,6 +32,12 @@ const createStudent = async (
   if (!user.password) {
     user.password = config.default_student_pass as string;
   }
+
+  // has password
+  // user.password = await bcrypt.hash(
+  //   user.password,
+  //   Number(config.bcrypt_salt_rounds)
+  // );
 
   // set role
   user.role = 'student';
@@ -116,17 +123,19 @@ const createFaculty = async (
   const session = await mongoose.startSession();
   try {
     session.startTransaction();
-
+    // generate faculty id
     const id = await generateFacultyId();
+    // set custom id into both  faculty & user
     user.id = id;
     faculty.id = id;
 
+    // Create faculty using sesssin
     const newFaculty = await Faculty.create([faculty], { session });
 
     if (!newFaculty.length) {
       throw new ApiError(httpStatus.BAD_REQUEST, 'Failed to create faculty!');
     }
-
+    // set faculty _id (reference) into user.student
     user.faculty = newFaculty[0]._id;
 
     const newUser = await User.create([user], { session });

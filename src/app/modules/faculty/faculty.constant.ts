@@ -10,6 +10,9 @@ export const facultyFilterableFields = [
   // 'permanentAddress',
   'bloodGroup',
   'designation',
+  'academicFaculty',
+  'academicDepartment',
+  'designation',
 ];
 
 
