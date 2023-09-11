@@ -36,7 +36,10 @@ const getSingleFaculty = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+// get all faculty
 const getAllFaculties = catchAsync(async(req: Request, res: Response) => {
+  // console.log(req.headers.authorization)
+  // console.log(req.user)
   const filters = pick(req.query, academicFacultyFilterableField);
   const paginationOptions = pick(req.query, paginationFields);
   const result = await AcademicFacultyService.getAllFaculties(filters, paginationOptions);
