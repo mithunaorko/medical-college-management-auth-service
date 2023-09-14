@@ -1,5 +1,6 @@
 import { z } from 'zod';
 
+// login zod schema
 const loginZodSchema = z.object({
   body: z.object({
     id: z.string({
@@ -11,6 +12,8 @@ const loginZodSchema = z.object({
   }),
 });
 
+
+// Refresh token zod schema
 const refreshTokenZodSchema = z.object({
   cookies: z.object({
     refreshToken: z.string({
@@ -19,7 +22,23 @@ const refreshTokenZodSchema = z.object({
   }),
 });
 
+
+// change old password zod schema
+const changePasswordZodSchema = z.object({
+  body: z.object({
+    oldPassword: z.string({
+      required_error: 'old password is required!',
+    }),
+    newPassword: z.string({
+      required_error: 'New password is required!',
+    }),
+  }),
+});
+
+
+
 export const AuthValidation = {
   loginZodSchema,
   refreshTokenZodSchema,
+  changePasswordZodSchema,
 };

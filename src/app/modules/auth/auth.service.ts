@@ -1,11 +1,17 @@
 /* eslint-disable no-console */
+// import bcrypt from 'bcrypt';
 import httpStatus from 'http-status';
-import { Secret } from 'jsonwebtoken';
+import { JwtPayload, Secret } from 'jsonwebtoken';
 import config from '../../../config';
 import ApiError from '../../../errors/ApiError';
 import { JwtHelpers } from '../../../helpers/jwtHelper';
 import { User } from '../user/user.model';
-import { ILoginUser, ILoginUserResponse, IRefreshTokenResponse } from './auth.interface';
+import {
+  IChangePassword,
+  ILoginUser,
+  ILoginUserResponse,
+  IRefreshTokenResponse,
+} from './auth.interface';
 
 const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   const { id, password } = payload;
@@ -34,7 +40,7 @@ const loginUser = async (payload: ILoginUser): Promise<ILoginUserResponse> => {
   // match password
   if (
     isUserExist.password &&
-    !(await User.isPasswordMatched(password, isUserExist?.password))
+    !(await User.isPasswordMatched(password, isUserExist.password))
   ) {
     throw new ApiError(httpStatus.UNAUTHORIZED, 'User password is incorrect!');
   }
@@ -80,7 +86,10 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   // verify token
   let verifiedToken = null;
   try {
-    verifiedToken = JwtHelpers.verifyToken(token, config.jwt.refresh_secret as Secret);
+    verifiedToken = JwtHelpers.verifyToken(
+      token,
+      config.jwt.refresh_secret as Secret
+    );
     console.log(verifiedToken);
   } catch (err) {
     throw new ApiError(httpStatus.FORBIDDEN, 'Refresh token is invalid!');
@@ -107,7 +116,55 @@ const refreshToken = async (token: string): Promise<IRefreshTokenResponse> => {
   };
 };
 
+// Change password
+const changePassword = async (user: JwtPayload | null, payload: IChangePassword): Promise<void> => {
+  const { oldPassword, newPassword } = payload;
+  console.log({user})
+
+  // Checking is user exist -> another way find user is exist or not 
+  // const isUserExist = await User.isUserExist(user?.userId);
+   
+  // alternative way to check user is exist or not 
+  const isUserExist = await User.findOne({id: user?.userId}).select('+password')
+  console.log(isUserExist)
+  if (!isUserExist) {
+    throw new ApiError(httpStatus.NOT_FOUND, 'User does not exist!');
+  }
+
+  // Match old user password
+  if (
+    isUserExist.password &&
+    !(await User.isPasswordMatched(oldPassword, isUserExist.password))
+  ) {
+    throw new ApiError(httpStatus.UNAUTHORIZED, 'Old password not match!');
+  }
+
+  // // Hash password 
+  // const newHashedPassword = await bcrypt.hash(
+  //   newPassword,
+  //   Number(config.bcrypt_salt_rounds)
+  // );
+
+  // // Update data
+  // const query = {id: user?.userId}
+  // const updatedData = {
+  //   password: newHashedPassword,
+  //   needsPasswordChange: false,
+  //   passwordChangedAt: new Date()
+  // }
+
+  // await User.findOneAndUpdate(query, updatedData)
+
+  // alternative way to update data
+  isUserExist.password = newPassword;
+  isUserExist.needsPasswordChange = false;
+
+  // alternative way to update password using save method
+  isUserExist.save()
+};
+
 export const AuthService = {
   loginUser,
   refreshToken,
+  changePassword,
 };
